@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    overflow: hidden;
+    
+    /* Animated gradient background */
+    background: linear-gradient(270deg, #ff758c, #ff7eb3, #ffb3c1, lch(74.15% 35.82 323.32));
+    background-size: 800% 800%; /* makes gradient move */
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Animate gradient movement */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+.card {
+    background: linear-gradient(270deg, #ddd2d4, #ed9bbd, #ffb3c1, lch(77.89% 10.21 323.13));
+    animation: gradientShift 15s ease infinite;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 360px;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 42px;
+    color: #ff4d6d;
+    animation: heartbeat 1.5s infinite;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 12px;
+}
+
+
+#yes {
+    background-color: #e1a7ec;
+    color: rgb(59, 57, 57);
+    font-family: 'Alegance', cursive;
+    font-size: 14px;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    outline: none;}
+
+#no  { background: #ddd; position: absolute; }
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 24px;
+    animation: floatUp 5s linear infinite;
+
+}
+
+
+
+.valentine-video {
+    width: 100%;
+    max-width: 100px;
+    border-radius: 15px;
+    margin-top: 15px;
+    box-shadow: 0 10px 25px rgba(255,77,109,0.4);
+    animation: fadeIn 1.5s ease;
+}
+
+
+.fancy-text {
+    
+    font-family: 'Vanilla Daisy', cursive; /* same as your title */
+    font-size: 20px;                     /* adjust size */
+    color: #d5a3fa;                      /* romantic pink */
+    text-shadow: 2px 2px 8px rgba(255,77,109,0.5); /* subtle glow */
+    margin: 10px 0;
+    animation: heartbeat 1.5s infinite;  /* optional pulsing effect */
+    background: linear-gradient(45deg, #1e2122, #514758);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+    <source src="LOVE.SONG.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="card">
+    <h1>Will you be my Valentine? 💖</h1>
+    <p id="asker"></p>
+    <button id="yes"><span>YES😁</span></button>
+    <button id="no">NO 😅</button>
+</div>
+
+<script>
+/* ✏️ EDIT NAMES HERE */
+const yourName = "KELLY";
+const valentineName = "My Love";
+
+document.getElementById("asker").innerText = `${yourName} is asking 💌`;
+
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const music = document.getElementById("music");
+
+// NO button runs 😈
+setInterval(() => {
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+}, 350);
+
+yesBtn.addEventListener("click", () => {
+    music.play(); // ✅ THIS NOW WORKS
+    
+    card.innerHTML = `
+    <h1>you'r mine now💘</h1>
+     <p class="fancy-text">${yourName} ❤️ ${valentineName}</p>
+    <p class="fancy-text">You just made my heart smile 💖</p>
+    
+
+    
+    <video class="valentine-video" autoplay muted loop>
+        <source src="LOVE.PLAY.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+`;
+
+    startHearts();
+});
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+
+        // Random emoji
+        const emojis = ["💖","😋","🤭","🫣","😛","😜","😝","🥵","😽","😻","😍","😘","🥰","😎"];
+        heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+        // Random position
+        heart.style.position = "absolute"; // must be absolute
+        heart.style.left = Math.random() * (window.innerWidth - 50) + "px"; // horizontal
+        heart.style.top = Math.random() * (window.innerHeight - 50) + "px"; // vertical
+
+        // Random size
+        heart.style.fontSize = (20 + Math.random() * 30) + "px";
+
+        // Optional: animate upwards
+        heart.style.animation = "floatUp 5s linear forwards";
+
+        document.body.appendChild(heart);
+
+        // Remove after 5s
+        setTimeout(() => heart.remove(), 5000);
+    }, 300);
+}
+
+
+</script>
+
+</body>
+</html>
+
